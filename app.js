@@ -3,7 +3,7 @@
   Example: https://your-airbnb-api.onrender.com
   Do not add /predict here.
 */
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://nyc-airbnb-room-type-classifier-oghy.onrender.com";
 
 const form = document.getElementById("prediction-form");
 const submitButton = document.getElementById("submit-button");
