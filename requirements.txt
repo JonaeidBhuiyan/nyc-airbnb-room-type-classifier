@@ -6,3 +6,4 @@ numpy==2.5.5
 scikit-learn==1.6.1
 joblib==1.6.0
 pydantic==2.14.3
+huggingface-hub==2.4.0

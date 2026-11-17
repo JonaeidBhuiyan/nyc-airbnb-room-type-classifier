@@ -1,4 +1,4 @@
-
+from huggingface_hub import hf_hub_download
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import Literal, Optional
@@ -109,12 +109,14 @@ class Features(BaseModel):
         description="Specific neighbourhood name"
     )
 
+MODEL_REPO_ID = "jonaeidbhuiyan/nyc-airbnb-room-type-classifier"
 
-from pathlib import Path
+model_path = hf_hub_download(
+    repo_id=MODEL_REPO_ID,
+    filename="Model_Pipeline.pkl"
+)
 
-BASE_DIR = Path(__file__).resolve().parent
-model = joblib.load(BASE_DIR / "Model_Pipeline.pkl")
-
+model = joblib.load(model_path)
 
 
 @app.get("/")
