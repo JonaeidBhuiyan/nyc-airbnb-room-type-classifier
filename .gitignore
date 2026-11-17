@@ -1,0 +1,8 @@
+
+__pycache__/
+*.py[cod]
+.venv/
+.venv313/
+.ipynb_checkpoints/
+AB_NYC_2019.csv
+Model_Pipeline.pkl

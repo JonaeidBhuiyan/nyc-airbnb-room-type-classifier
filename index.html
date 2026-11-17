@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f4ef" />
+  <meta name="description" content="Predict an Airbnb listing's room type using listing details and a machine-learning model." />
+  <title>StayType — Airbnb Room Type Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="StayType home">
+        <span class="brand-mark">s<span>.</span></span>
+        <span>staytype</span>
+      </a>
+      <div class="topbar-right">
+        <span class="status-dot"></span>
+        <span>NYC LISTING ANALYTICS</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> AIRBNB ROOM TYPE CLASSIFIER</p>
+          <h1>Understand your<br><em>space.</em> Predict its type.</h1>
+          <p class="intro-text">Enter a few details about a New York City listing. Your machine-learning model will estimate whether it is an entire home, private room, or shared room.</p>
+          <div class="intro-note"><span class="spark">✳</span> A clear view of your listing, powered by data.</div>
+        </div>
+        <div class="intro-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+          <div class="art-card">
+            <div class="art-window"><span></span><span></span><span></span></div>
+            <div class="art-room">
+              <div class="art-sun"></div>
+              <div class="art-wall"></div>
+              <div class="art-sofa"></div>
+              <div class="art-plant"><i></i><i></i><i></i></div>
+            </div>
+            <div class="art-caption"><span>YOUR LISTING</span><b>01 / NYC</b></div>
+          </div>
+          <div class="floating-tag"><span class="tag-icon">⌂</span><span><b>3 room types</b><small>One smart prediction</small></span></div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="form-panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">THE LISTING DETAILS <span class="step-count">01 — 03</span></p>
+              <h2>Tell us about the place.</h2>
+              <p class="section-subtitle">All fields are based on the AB_NYC_2019 dataset.</p>
+            </div>
+            <span class="heading-spark">✳</span>
+          </div>
+
+          <form id="prediction-form">
+            <fieldset>
+              <legend><span class="legend-number">01</span><span><b>Location</b><small>Where is the property situated?</small></span></legend>
+              <div class="form-grid">
+                <label class="field">
+                  <span>Borough <i>*</i></span>
+                  <select name="neighbourhood_group" required>
+                    <option value="" disabled selected>Select borough</option>
+                    <option>Brooklyn</option>
+                    <option>Manhattan</option>
+                    <option>Queens</option>
+                    <option>Staten Island</option>
+                    <option>Bronx</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Neighbourhood <i>*</i></span>
+                  <input name="neighbourhood" list="neighbourhood-list" placeholder="e.g. Harlem" required autocomplete="off" />
+                  <datalist id="neighbourhood-list">
+          <option value="Allerton"></option>
+          <option value="Arden Heights"></option>
+          <option value="Arrochar"></option>
+          <option value="Arverne"></option>
+          <option value="Astoria"></option>
+          <option value="Bath Beach"></option>
+          <option value="Battery Park City"></option>
+          <option value="Bay Ridge"></option>
+          <option value="Bay Terrace"></option>
+          <option value="Bay Terrace, Staten Island"></option>
+          <option value="Baychester"></option>
+          <option value="Bayside"></option>
+          <option value="Bayswater"></option>
+          <option value="Bedford-Stuyvesant"></option>
+          <option value="Belle Harbor"></option>
+          <option value="Bellerose"></option>
+          <option value="Belmont"></option>
+          <option value="Bensonhurst"></option>
+          <option value="Bergen Beach"></option>
+          <option value="Boerum Hill"></option>
+          <option value="Borough Park"></option>
+          <option value="Breezy Point"></option>
+          <option value="Briarwood"></option>
+          <option value="Brighton Beach"></option>
+          <option value="Bronxdale"></option>
+          <option value="Brooklyn Heights"></option>
+          <option value="Brownsville"></option>
+          <option value="Bull's Head"></option>
+          <option value="Bushwick"></option>
+          <option value="Cambria Heights"></option>
+          <option value="Canarsie"></option>
+          <option value="Carroll Gardens"></option>
+          <option value="Castle Hill"></option>
+          <option value="Castleton Corners"></option>
+          <option value="Chelsea"></option>
+          <option value="Chinatown"></option>
+          <option value="City Island"></option>
+          <option value="Civic Center"></option>
+          <option value="Claremont Village"></option>
+          <option value="Clason Point"></option>
+          <option value="Clifton"></option>
+          <option value="Clinton Hill"></option>
+          <option value="Co-op City"></option>
+          <option value="Cobble Hill"></option>
+          <option value="College Point"></option>
+          <option value="Columbia St"></option>
+          <option value="Concord"></option>
+          <option value="Concourse"></option>
+          <option value="Concourse Village"></option>
+          <option value="Coney Island"></option>
+          <option value="Corona"></option>
+          <option value="Crown Heights"></option>
+          <option value="Cypress Hills"></option>
+          <option value="DUMBO"></option>
+          <option value="Ditmars Steinway"></option>
+          <option value="Dongan Hills"></option>
+          <option value="Douglaston"></option>
+          <option value="Downtown Brooklyn"></option>
+          <option value="Dyker Heights"></option>
+          <option value="East Elmhurst"></option>
+          <option value="East Flatbush"></option>
+          <option value="East Harlem"></option>
+          <option value="East Morrisania"></option>
+          <option value="East New York"></option>
+          <option value="East Village"></option>
+          <option value="Eastchester"></option>
+          <option value="Edenwald"></option>
+          <option value="Edgemere"></option>
+          <option value="Elmhurst"></option>
+          <option value="Eltingville"></option>
+          <option value="Emerson Hill"></option>
+          <option value="Far Rockaway"></option>
+          <option value="Fieldston"></option>
+          <option value="Financial District"></option>
+          <option value="Flatbush"></option>
+          <option value="Flatiron District"></option>
+          <option value="Flatlands"></option>
+          <option value="Flushing"></option>
+          <option value="Fordham"></option>
+          <option value="Forest Hills"></option>
+          <option value="Fort Greene"></option>
+          <option value="Fort Hamilton"></option>
+          <option value="Fort Wadsworth"></option>
+          <option value="Fresh Meadows"></option>
+          <option value="Glendale"></option>
+          <option value="Gowanus"></option>
+          <option value="Gramercy"></option>
+          <option value="Graniteville"></option>
+          <option value="Grant City"></option>
+          <option value="Gravesend"></option>
+          <option value="Great Kills"></option>
+          <option value="Greenpoint"></option>
+          <option value="Greenwich Village"></option>
+          <option value="Grymes Hill"></option>
+          <option value="Harlem"></option>
+          <option value="Hell's Kitchen"></option>
+          <option value="Highbridge"></option>
+          <option value="Hollis"></option>
+          <option value="Holliswood"></option>
+          <option value="Howard Beach"></option>
+          <option value="Howland Hook"></option>
+          <option value="Huguenot"></option>
+          <option value="Hunts Point"></option>
+          <option value="Inwood"></option>
+          <option value="Jackson Heights"></option>
+          <option value="Jamaica"></option>
+          <option value="Jamaica Estates"></option>
+          <option value="Jamaica Hills"></option>
+          <option value="Kensington"></option>
+          <option value="Kew Gardens"></option>
+          <option value="Kew Gardens Hills"></option>
+          <option value="Kingsbridge"></option>
+          <option value="Kips Bay"></option>
+          <option value="Laurelton"></option>
+          <option value="Lighthouse Hill"></option>
+          <option value="Little Italy"></option>
+          <option value="Little Neck"></option>
+          <option value="Long Island City"></option>
+          <option value="Longwood"></option>
+          <option value="Lower East Side"></option>
+          <option value="Manhattan Beach"></option>
+          <option value="Marble Hill"></option>
+          <option value="Mariners Harbor"></option>
+          <option value="Maspeth"></option>
+          <option value="Melrose"></option>
+          <option value="Middle Village"></option>
+          <option value="Midland Beach"></option>
+          <option value="Midtown"></option>
+          <option value="Midwood"></option>
+          <option value="Mill Basin"></option>
+          <option value="Morningside Heights"></option>
+          <option value="Morris Heights"></option>
+          <option value="Morris Park"></option>
+          <option value="Morrisania"></option>
+          <option value="Mott Haven"></option>
+          <option value="Mount Eden"></option>
+          <option value="Mount Hope"></option>
+          <option value="Murray Hill"></option>
+          <option value="Navy Yard"></option>
+          <option value="Neponsit"></option>
+          <option value="New Brighton"></option>
+          <option value="New Dorp"></option>
+          <option value="New Dorp Beach"></option>
+          <option value="New Springville"></option>
+          <option value="NoHo"></option>
+          <option value="Nolita"></option>
+          <option value="North Riverdale"></option>
+          <option value="Norwood"></option>
+          <option value="Oakwood"></option>
+          <option value="Olinville"></option>
+          <option value="Ozone Park"></option>
+          <option value="Park Slope"></option>
+          <option value="Parkchester"></option>
+          <option value="Pelham Bay"></option>
+          <option value="Pelham Gardens"></option>
+          <option value="Port Morris"></option>
+          <option value="Port Richmond"></option>
+          <option value="Prince's Bay"></option>
+          <option value="Prospect Heights"></option>
+          <option value="Prospect-Lefferts Gardens"></option>
+          <option value="Queens Village"></option>
+          <option value="Randall Manor"></option>
+          <option value="Red Hook"></option>
+          <option value="Rego Park"></option>
+          <option value="Richmond Hill"></option>
+          <option value="Richmondtown"></option>
+          <option value="Ridgewood"></option>
+          <option value="Riverdale"></option>
+          <option value="Rockaway Beach"></option>
+          <option value="Roosevelt Island"></option>
+          <option value="Rosebank"></option>
+          <option value="Rosedale"></option>
+          <option value="Rossville"></option>
+          <option value="Schuylerville"></option>
+          <option value="Sea Gate"></option>
+          <option value="Sheepshead Bay"></option>
+          <option value="Shore Acres"></option>
+          <option value="Silver Lake"></option>
+          <option value="SoHo"></option>
+          <option value="Soundview"></option>
+          <option value="South Beach"></option>
+          <option value="South Ozone Park"></option>
+          <option value="South Slope"></option>
+          <option value="Springfield Gardens"></option>
+          <option value="Spuyten Duyvil"></option>
+          <option value="St. Albans"></option>
+          <option value="St. George"></option>
+          <option value="Stapleton"></option>
+          <option value="Stuyvesant Town"></option>
+          <option value="Sunnyside"></option>
+          <option value="Sunset Park"></option>
+          <option value="Theater District"></option>
+          <option value="Throgs Neck"></option>
+          <option value="Todt Hill"></option>
+          <option value="Tompkinsville"></option>
+          <option value="Tottenville"></option>
+          <option value="Tremont"></option>
+          <option value="Tribeca"></option>
+          <option value="Two Bridges"></option>
+          <option value="Unionport"></option>
+          <option value="University Heights"></option>
+          <option value="Upper East Side"></option>
+          <option value="Upper West Side"></option>
+          <option value="Van Nest"></option>
+          <option value="Vinegar Hill"></option>
+          <option value="Wakefield"></option>
+          <option value="Washington Heights"></option>
+          <option value="West Brighton"></option>
+          <option value="West Farms"></option>
+          <option value="West Village"></option>
+          <option value="Westchester Square"></option>
+          <option value="Westerleigh"></option>
+          <option value="Whitestone"></option>
+          <option value="Williamsbridge"></option>
+          <option value="Williamsburg"></option>
+          <option value="Willowbrook"></option>
+          <option value="Windsor Terrace"></option>
+          <option value="Woodhaven"></option>
+          <option value="Woodlawn"></option>
+          <option value="Woodrow"></option>
+          <option value="Woodside"></option>
+                  </datalist>
+                  <small class="field-hint">Start typing to see dataset neighbourhoods.</small>
+                </label>
+                <label class="field">
+                  <span>Latitude <i>*</i></span>
+                  <input name="latitude" type="number" min="-90" max="90" step="any" placeholder="40.7128" required />
+                </label>
+                <label class="field">
+                  <span>Longitude <i>*</i></span>
+                  <input name="longitude" type="number" min="-180" max="180" step="any" placeholder="-74.0060" required />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="legend-number">02</span><span><b>Listing information</b><small>Describe the booking and pricing details.</small></span></legend>
+              <div class="form-grid">
+                <label class="field">
+                  <span>Price per night (USD) <i>*</i></span>
+                  <div class="input-prefix"><span>$</span><input name="price" type="number" min="0.01" step="0.01" placeholder="150" required /></div>
+                </label>
+                <label class="field">
+                  <span>Minimum nights <i>*</i></span>
+                  <input name="minimum_nights" type="number" min="1" max="365" step="1" placeholder="2" required />
+                </label>
+                <label class="field">
+                  <span>Total reviews <i>*</i></span>
+                  <input name="number_of_reviews" type="number" min="0" step="1" placeholder="45" required />
+                </label>
+                <label class="field">
+                  <span>Reviews per month</span>
+                  <input name="reviews_per_month" type="number" min="0" step="any" placeholder="Leave blank if unknown" />
+                  <small class="field-hint">Optional — blank values are sent as null.</small>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="legend-number">03</span><span><b>Host availability</b><small>A little more context about the host.</small></span></legend>
+              <div class="form-grid">
+                <label class="field">
+                  <span>Host's listing count <i>*</i></span>
+                  <input name="calculated_host_listings_count" type="number" min="0" step="1" placeholder="3" required />
+                </label>
+                <label class="field">
+                  <span>Availability (days / year) <i>*</i></span>
+                  <input name="availability_365" type="number" min="0" max="365" step="1" placeholder="180" required />
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="form-footer">
+              <p><span class="lock-icon">↳</span> Your listing details are sent to the prediction API.</p>
+              <button class="submit-button" type="submit" id="submit-button">
+                <span class="button-label">Predict room type</span><span class="button-arrow">↗</span>
+              </button>
+            </div>
+            <p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <aside class="result-panel">
+          <div class="result-topline"><span>YOUR PREDICTION</span><span class="result-index">ST / 01</span></div>
+          <div class="result-main" id="result-main">
+            <div class="result-illustration"><span class="illustration-roof"></span><span class="illustration-house"></span><span class="illustration-door"></span></div>
+            <p class="result-kicker">THE RESULT</p>
+            <h2 id="result-title">A clearer picture<br>starts here.</h2>
+            <p class="result-description" id="result-description">Complete the listing details and run your prediction to see the room type estimated by your model.</p>
+            <div class="waiting-pill" id="waiting-pill"><span></span> WAITING FOR INPUT</div>
+          </div>
+          <div class="probability-section" id="probability-section" hidden>
+            <div class="probability-heading"><b>Class probabilities</b><span>MODEL OUTPUT</span></div>
+            <div id="probability-list"></div>
+          </div>
+          <div class="result-bottom">
+            <div class="result-foot-icon">✳</div>
+            <div><b>A note on predictions</b><p>This result is an estimate from a machine-learning model, not a guarantee about a listing.</p></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a class="brand footer-brand" href="#"><span class="brand-mark">s<span>.</span></span><span>staytype</span></a>
+      <span>NYC AIRBNB CLASSIFIER · MACHINE LEARNING PROJECT</span>
+      <span>BUILT TO EXPLORE ↗</span>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
